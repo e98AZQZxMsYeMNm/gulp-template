@@ -29,24 +29,19 @@ gulp.task('serve', () => {
 // Sass
 gulp.task( "sass", () => {
     return gulp.src( 'src/sass/*.scss' )
-        .pipe( sass().on( 'error', sass.logError ) )
-        .pipe( autoprefixer())
+        .pipe(sass().on( 'error', sass.logError ) )
+        .pipe(autoprefixer())
         .pipe(cleanCSS())
         .pipe(rename({extname: '.min.css'}))
-        .pipe( gulp.dest( './public/css' ));
+        .pipe(gulp.dest( './public/css' ));
 });
 
 // EJS
 gulp.task( "ejs",  () => {
     return gulp.src(["./src/ejs/**/*.ejs", '!' + "src/ejs/**/_*.ejs"])    
         .pipe(ejs())
-        .pipe(htmlmin({
-            // 余白を除去する
-            collapseWhitespace : true,
-            // HTMLコメントを除去する
-            removeComments : true
-        }))
-        .pipe(rename({ extname: '.html' }))
+        .pipe(htmlmin({collapseWhitespace : true, removeComments : true}))
+        .pipe(rename({extname: '.html' }))
         .pipe( gulp.dest( "./public/" ) );
 });
 
@@ -58,5 +53,4 @@ gulp.task('js', () => {
 });
 
 gulp.task('default', gulp.series(gulp.parallel('serve', 'watch'),function(){
-    
 }));
