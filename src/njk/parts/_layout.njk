@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+ 
+        <title>{{ title }}</title>
+        <script src="/js/app.min.js"></script>
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="/css/style.min.css">
+        {% block css %}{% endblock -%}
+    </head>
+    <body>
+        {% include 'parts/_header.njk' %}
+        {% block contents %}{% endblock %}
+        {% include 'parts/_footer.njk' %}
+        {% block js %}{% endblock -%}
+</body>
+</html>

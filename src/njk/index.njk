@@ -1,0 +1,22 @@
+{% extends 'parts/_layout.njk' %}
+{% set title = 'タイトル' %}
+ 
+{% block css -%}
+<style>
+    body {
+        margin:0px;
+    }
+</style>
+{% endblock %}
+ 
+{% block contents -%}
+    <h2>テンプレート化</h2>
+    <p>このサンプルを改変すると便利です。</p>
+{%- endblock %}
+ 
+ 
+{% block js -%}
+<script>
+console.log("");
+</script>
+{% endblock %}

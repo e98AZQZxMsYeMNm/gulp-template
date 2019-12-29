@@ -1,18 +1,18 @@
 var gulp = require("gulp");
 var sass = require("gulp-sass");
 var autoprefixer = require("gulp-autoprefixer");
-var ejs = require("gulp-ejs");
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var htmlmin = require('gulp-htmlmin');
 var cleanCSS = require("gulp-clean-css");
 var connect = require('gulp-connect');
+var nunjucksRender = require('gulp-nunjucks-render');
 
 
 // 監視　※gulp4の書き方です。
 gulp.task( "watch", () => {
     gulp.watch( "src/sass/**/*.scss", gulp.series( "sass" ) ); // sassディレクトリ以下の.scssファイルの更新を監視
-    gulp.watch( "src/ejs/**/*.ejs", gulp.series( "ejs" ) ); // ejsディレクトリ以下の.ejsファイルの更新を監視
+    gulp.watch( "src/njk/**/*.njk", gulp.series( "njk" ) ); // njkディレクトリ以下の.njkファイルの更新を監視
     gulp.watch( "src/js/**/*.js", gulp.series( "js" ) );
     gulp.parallel('serve');
 });
@@ -36,10 +36,12 @@ gulp.task( "sass", () => {
         .pipe(gulp.dest( './public/css' ));
 });
 
-// EJS
-gulp.task( "ejs",  () => {
-    return gulp.src(["./src/ejs/**/*.ejs", '!' + "src/ejs/**/_*.ejs"])    
-        .pipe(ejs())
+// njk
+gulp.task( "njk",  () => {
+    return gulp.src(["./src/njk/**/*.njk", '!' + "src/njk/**/_*.njk"])    
+        .pipe(nunjucksRender({
+          path: ['src/njk/']
+        }))
         .pipe(htmlmin({collapseWhitespace : true, removeComments : true}))
         .pipe(rename({extname: '.html' }))
         .pipe( gulp.dest( "./public/" ) );
