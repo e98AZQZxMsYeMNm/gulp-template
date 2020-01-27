@@ -52,23 +52,23 @@ gulp.task( "njk",  () => {
 });
 
 gulp.task('js', () => {
-    gulp.src(['./src/js/*.js', '!./js/*.min.js'])
+    return gulp.src(['./src/js/*.js', '!./js/*.min.js'])
         .pipe(uglify())
         .pipe(rename({extname: '.min.js'}))
         .pipe(gulp.dest('./public/js/'));
 });
 
 gulp.task('img', function () {
-  gulp.src('./src/img/**/*.{jpg,jpeg,png,gif,svg}')
-  .pipe(imagemin(
-    [
-      pngquant({ quality: '65-80', speed: 1 }),
-      mozjpeg({ quality: 80 }),
-      imagemin.svgo(),
-      imagemin.gifsicle()
-    ]
-  ))
-  .pipe(gulp.dest('./public/img/'));
+  return gulp.src('./src/img/**/*.{jpg,jpeg,png,gif,svg}')
+        .pipe(imagemin(
+          [
+            pngquant({ quality: '65-80', speed: 1 }),
+            mozjpeg({ quality: 80 }),
+            imagemin.svgo(),
+            imagemin.gifsicle()
+          ]
+        ))
+        .pipe(gulp.dest('./public/img/'));
 });
 
 
