@@ -59,7 +59,7 @@ gulp.task('js', () => {
 });
 
 gulp.task('img', function () {
-  return gulp.src('./src/img/**/*.{jpg,jpeg,png,gif,svg}')
+    return gulp.src('./src/img/**/*.{jpg,jpeg,png,gif,svg}')
         .pipe(imagemin(
           [
             pngquant({ quality: '65-80', speed: 1 }),
@@ -75,3 +75,5 @@ gulp.task('img', function () {
 
 gulp.task('default', gulp.series(gulp.parallel('serve', 'watch'),function(){
 }));
+
+gulp.task('build', gulp.series(gulp.parallel('njk', 'js', 'img', 'sass')));
